@@ -30,7 +30,7 @@ COPY --from=builder --chown=node:node /app/public ./public
 COPY --from=builder --chown=node:node /app/.next/standalone ./
 COPY --from=builder --chown=node:node /app/.next/static ./.next/static
 
-RUN chown node:node .next
+RUN chown node:node /app
 
 USER node
 EXPOSE 3000
