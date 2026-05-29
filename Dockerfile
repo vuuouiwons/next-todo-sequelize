@@ -1,6 +1,8 @@
-ARG NODE_VERSION=lts-alpine
+FROM node:lts-alpine AS base
 
-FROM node:${NODE_VERSION} AS builder
+WORKDIR /app
+
+FROM base AS builder
 
 WORKDIR /app
 
@@ -16,9 +18,7 @@ ENV NODE_ENV=production
 
 RUN pnpm run build
 
-FROM node:${NODE_VERSION} AS runner
-
-WORKDIR /app
+FROM base AS prod
 
 ENV NODE_ENV=production
 ENV PORT=3000
