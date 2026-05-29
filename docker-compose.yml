@@ -19,5 +19,4 @@ volumes:
   pgdata:
 
 networks:
-  local: 
-    external: true
+  local:
