@@ -1,4 +1,4 @@
-import { ApiRequestConfig } from "@/app/types/sendFetch";
+import { ApiRequestConfig } from "@/interfaces/sendFetch";
 
 export async function sendFetch(params: ApiRequestConfig) {
     const fullUrl = `${params.prefix}/${params.endpoint}`.replace(/\/+/g, '/');

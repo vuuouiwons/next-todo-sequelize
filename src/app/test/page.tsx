@@ -3,26 +3,31 @@ import { Button } from "@/components/ui/button"
 import { useState } from "react";
 import { toast } from "sonner"
 import { Textarea } from "@/components/ui/textarea"
+import { useCounterStore } from "@/store/useCounterStore";
 
 export default function Home() {
-  const [value, setValue] = useState(0)
+  // const [value, setValue] = useState(0)
+  const value = useCounterStore((state) => state.value);
+  const increment = useCounterStore((state) => state.increment);
+  const decrement = useCounterStore((state) => state.decrement);
+  const reset = useCounterStore((state) => state.reset);
+
   const [message, setMessage] = useState("");
 
-  const increment = () => {
+  // const increment = () => {
+  //   updateValue(value + 1);
+  //   toast.success('incremented 1');
+  // }
 
-    setValue((prevValue) => prevValue + 1);
-    toast.success('incremented 1');
-  }
+  // const decrement = () => {
+  //   updateValue(value - 1);
+  //   toast.warning('decremented 1');
+  // }
 
-  const decrement = () => {
-    setValue((prevValue) => prevValue - 1);
-    toast.warning('decremented 1');
-  }
-
-  const reset = () => {
-    setValue(0);
-    toast.error('reseted to 0');
-  }
+  // const reset = () => {
+  //   updateValue(0);
+  //   toast.error('reseted to 0');
+  // }
 
   const handleSendMessage = async () => {
     console.log(message);

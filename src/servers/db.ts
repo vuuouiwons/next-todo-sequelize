@@ -1,18 +1,14 @@
 import { Sequelize, DataTypes, Model } from 'sequelize';
 import pg from 'pg';
+import { DATABASE_URL } from '@/config/db';
 
-// Verify the environment variable exists
-const DATABASE_URL = 'postgres://user:password@postgres_db:5432/todolist_nextjs'
-
-// Initialize Sequelize with PostgreSQL
 const sequelize = new Sequelize(DATABASE_URL, {
   dialect: 'postgres',
-  dialectModule: pg, // Crucial for Next.js App Router compatibility
+  dialectModule: pg,
   logging: false,
   dialectOptions: {},
 });
 
-// Define the Todo Model (This remains exactly the same)
 class Todo extends Model {
   declare id: number;
   declare title: string;
@@ -41,7 +37,6 @@ Todo.init(
   }
 );
 
-// Synchronize the model with the database
 sequelize.sync();
 
 export { sequelize, Todo };
