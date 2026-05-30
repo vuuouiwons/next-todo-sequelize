@@ -20,7 +20,7 @@ export default function Home() {
   }, []);
 
   const fetchTodos = async () => {
-    const res = await fetch('/api/todos');
+    const res = await fetch('/api/edge/v1/todos');
     const data = await res.json();
     setTodos(data);
     setLoading(false);
@@ -30,9 +30,8 @@ export default function Home() {
     e.preventDefault();
     if (!newTodo.trim()) return;
 
-    const res = await fetch('/api/todos', {
+    const res = await fetch('/api/edge/v1/todos', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ title: newTodo }),
     });
     
@@ -42,9 +41,8 @@ export default function Home() {
   };
 
   const toggleTodo = async (id: number, currentStatus: boolean) => {
-    await fetch(`/api/todos/${id}`, {
+    await fetch(`/api/edge/v1/todos/${id}`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ completed: !currentStatus }),
     });
 
@@ -54,7 +52,7 @@ export default function Home() {
   };
 
   const deleteTodo = async (id: number) => {
-    await fetch(`/api/todos/${id}`, { method: 'DELETE' });
+    await fetch(`/api/edge/v1/todos/${id}`, { method: 'DELETE' });
     setTodos(todos.filter(todo => todo.id !== id));
   };
 
