@@ -1,7 +1,7 @@
 "use client"
 import { Button } from "@/components/ui/button"
 import { useCounterStore } from "@/store/useCounterStore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const value = useCounterStore((state) => state.value);
@@ -9,6 +9,20 @@ export default function Home() {
   const decrement = useCounterStore((state) => state.decrement);
   const reset = useCounterStore((state) => state.reset);
 
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return (
+      <>
+        <p>Loading counter...</p>
+      </>
+    );
+  }
   // const [value, setValue] = useState(0)
 
   // const increment = () => {

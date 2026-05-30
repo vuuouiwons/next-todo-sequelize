@@ -1,6 +1,6 @@
 "use client"
 import { Button } from "@/components/ui/button"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner"
 import { Textarea } from "@/components/ui/textarea"
 import { useCounterStore } from "@/store/useCounterStore";
@@ -13,6 +13,20 @@ export default function Home() {
   const reset = useCounterStore((state) => state.reset);
 
   const [message, setMessage] = useState("");
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return (
+      <>
+        <p>Loading counter...</p>
+      </>
+    );
+  }
 
   // const increment = () => {
   //   updateValue(value + 1);
